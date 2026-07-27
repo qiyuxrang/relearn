@@ -1,0 +1,183 @@
+/* ============================================================
+   Relearn 设计令牌
+   深色优先的开发者工具风格：Slate 底 + Teal 主色 + Amber 强调
+   ============================================================ */
+
+:root {
+  /* ---------- 色板：深色（默认） ---------- */
+  --bg:            #0B1120;
+  --bg-elev:       #111A2E;
+  --card:          #141E33;
+  --card-hover:    #1A2540;
+  --muted:         #1B2740;
+  --border:        #26344F;
+  --border-strong: #3A4C6E;
+
+  --fg:            #E8EEF9;
+  --fg-soft:       #B4C2DA;
+  --fg-muted:      #7D8DA8;
+
+  --primary:       #2DD4BF;
+  --primary-deep:  #0D9488;
+  --primary-soft:  rgba(45, 212, 191, 0.12);
+  --on-primary:    #06231F;
+
+  --accent:        #FBBF24;
+  --accent-soft:   rgba(251, 191, 36, 0.13);
+  --on-accent:     #2A1D00;
+
+  --violet:        #A78BFA;
+  --violet-soft:   rgba(167, 139, 250, 0.14);
+  --rose:          #FB7185;
+  --rose-soft:     rgba(251, 113, 133, 0.13);
+  --sky:           #38BDF8;
+  --sky-soft:      rgba(56, 189, 248, 0.13);
+  --lime:          #A3E635;
+  --lime-soft:     rgba(163, 230, 53, 0.13);
+
+  --ok:            #34D399;
+  --ok-soft:       rgba(52, 211, 153, 0.13);
+  --warn:          #FBBF24;
+  --danger:        #F87171;
+  --danger-soft:   rgba(248, 113, 113, 0.13);
+
+  /* 可视化专用语义色（数据结构状态） */
+  --viz-idle:      #33415C;
+  --viz-idle-fg:   #C6D2E6;
+  --viz-active:    #2DD4BF;   /* 当前操作对象 */
+  --viz-compare:   #FBBF24;   /* 正在比较 */
+  --viz-done:      #34D399;   /* 已完成/已确定 */
+  --viz-visited:   #A78BFA;   /* 已访问 */
+  --viz-path:      #FB7185;   /* 结果路径 */
+  --viz-pivot:     #38BDF8;   /* 枢轴/关键元素 */
+  --viz-dim:       #223052;   /* 淡出/无关 */
+
+  /* 语法高亮 */
+  --syn-key:       #FF7B9C;
+  --syn-type:      #7DD3FC;
+  --syn-str:       #A3E635;
+  --syn-num:       #FBBF24;
+  --syn-com:       #64748B;
+  --syn-fn:        #C4B5FD;
+  --syn-pre:       #F0ABFC;
+  --syn-op:        #94A3B8;
+
+  /* ---------- 排版 ---------- */
+  --font-sans: "Inter", "IBM Plex Sans", -apple-system, BlinkMacSystemFont,
+               "Segoe UI", "PingFang SC", "Microsoft YaHei", "Hiragino Sans GB",
+               "Noto Sans SC", sans-serif;
+  --font-mono: "JetBrains Mono", "Cascadia Code", "Fira Code", Consolas,
+               "Courier New", "Noto Sans Mono SC", monospace;
+
+  --fs-xs:   0.75rem;
+  --fs-sm:   0.8125rem;
+  --fs-base: 0.9375rem;
+  --fs-md:   1rem;
+  --fs-lg:   1.125rem;
+  --fs-xl:   1.375rem;
+  --fs-2xl:  1.75rem;
+  --fs-3xl:  2.25rem;
+  --fs-4xl:  3rem;
+
+  --lh-tight: 1.25;
+  --lh-base:  1.5;
+  --lh-loose: 1.8;
+
+  /* ---------- 间距（density 6/10：标准） ---------- */
+  --sp-1:  4px;
+  --sp-2:  8px;
+  --sp-3:  12px;
+  --sp-4:  16px;
+  --sp-5:  24px;
+  --sp-6:  32px;
+  --sp-7:  48px;
+  --sp-8:  64px;
+
+  /* ---------- 圆角 / 阴影 ---------- */
+  --r-sm: 6px;
+  --r-md: 10px;
+  --r-lg: 14px;
+  --r-xl: 20px;
+  --r-full: 999px;
+
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.35);
+  --shadow-lg: 0 12px 40px rgba(0, 0, 0, 0.45);
+  --shadow-glow: 0 0 0 1px var(--primary-soft), 0 8px 30px rgba(45, 212, 191, 0.12);
+
+  /* ---------- 动效 ---------- */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-io:  cubic-bezier(0.4, 0, 0.2, 1);
+  --t-fast:   140ms;
+  --t-base:   220ms;
+  --t-slow:   380ms;
+
+  /* ---------- 布局 ---------- */
+  --sidebar-w: 288px;
+  --topbar-h:  56px;
+  --toc-w:     220px;
+  --content-max: 860px;
+}
+
+/* ---------- 浅色主题 ---------- */
+[data-theme="light"] {
+  --bg:            #F6F9FC;
+  --bg-elev:       #FFFFFF;
+  --card:          #FFFFFF;
+  --card-hover:    #F1F6FA;
+  --muted:         #ECF1F7;
+  --border:        #DCE5EE;
+  --border-strong: #B9C7D8;
+
+  --fg:            #0F2033;
+  --fg-soft:       #3B5068;
+  --fg-muted:      #64798F;
+
+  --primary:       #0D9488;
+  --primary-deep:  #0F766E;
+  --primary-soft:  rgba(13, 148, 136, 0.10);
+  --on-primary:    #FFFFFF;
+
+  --accent:        #B45309;
+  --accent-soft:   rgba(180, 83, 9, 0.10);
+  --on-accent:     #FFFFFF;
+
+  --violet:        #7C3AED;
+  --violet-soft:   rgba(124, 58, 237, 0.10);
+  --rose:          #E11D48;
+  --rose-soft:     rgba(225, 29, 72, 0.10);
+  --sky:           #0284C7;
+  --sky-soft:      rgba(2, 132, 199, 0.10);
+  --lime:          #4D7C0F;
+  --lime-soft:     rgba(77, 124, 15, 0.10);
+
+  --ok:            #047857;
+  --ok-soft:       rgba(4, 120, 87, 0.10);
+  --warn:          #B45309;
+  --danger:        #DC2626;
+  --danger-soft:   rgba(220, 38, 38, 0.10);
+
+  --viz-idle:      #CBD8E6;
+  --viz-idle-fg:   #1E293B;
+  --viz-active:    #0D9488;
+  --viz-compare:   #B45309;
+  --viz-done:      #047857;
+  --viz-visited:   #7C3AED;
+  --viz-path:      #E11D48;
+  --viz-pivot:     #0284C7;
+  --viz-dim:       #E4EBF2;
+
+  --syn-key:       #BE185D;
+  --syn-type:      #0369A1;
+  --syn-str:       #3F6212;
+  --syn-num:       #B45309;
+  --syn-com:       #6B7C93;
+  --syn-fn:        #6D28D9;
+  --syn-pre:       #A21CAF;
+  --syn-op:        #475569;
+
+  --shadow-sm: 0 1px 2px rgba(15, 32, 51, 0.06);
+  --shadow-md: 0 4px 16px rgba(15, 32, 51, 0.08);
+  --shadow-lg: 0 12px 40px rgba(15, 32, 51, 0.12);
+  --shadow-glow: 0 0 0 1px var(--primary-soft), 0 8px 30px rgba(13, 148, 136, 0.10);
+}

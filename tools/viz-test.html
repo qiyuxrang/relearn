@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>动画测试台 · Relearn</title>
+<link rel="stylesheet" href="../assets/css/tokens.css">
+<link rel="stylesheet" href="../assets/css/base.css">
+<link rel="stylesheet" href="../assets/css/prose.css">
+<link rel="stylesheet" href="../assets/css/viz.css">
+<style>
+  body { padding: 24px; }
+  .wrap { max-width: 900px; margin: 0 auto; }
+  h1 { font-size: 22px; }
+  .kind-nav { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 24px; }
+  .kind-nav button {
+    padding: 4px 10px; border-radius: 8px; border: 1px solid var(--border);
+    background: var(--card); color: var(--fg-soft); font-size: 12px; font-family: var(--font-mono);
+  }
+  .kind-nav button:hover { border-color: var(--primary); color: var(--primary); }
+  .kind-nav button.bad { border-color: var(--danger); color: var(--danger); }
+  #report { font-family: var(--font-mono); font-size: 12px; color: var(--fg-muted); white-space: pre-wrap; margin: 12px 0; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>动画测试台</h1>
+  <p style="color:var(--fg-muted)">逐个挂载所有已注册动画并快进全部帧，捕获运行时异常。</p>
+  <div id="report">加载中…</div>
+  <div class="kind-nav" id="nav"></div>
+  <div id="stage"></div>
+</div>
+<script type="module">
+import { mountViz, VIZ_KINDS } from '../assets/js/viz/index.js';
+
+const report = document.getElementById('report');
+const nav = document.getElementById('nav');
+const stageBox = document.getElementById('stage');
+const results = {};
+
+async function smokeTest(kind) {
+  // 挂载 → 快进每一帧 → 收集异常
+  const host = document.createElement('div');
+  stageBox.innerHTML = '';
+  stageBox.appendChild(host);
+  const errs = [];
+  const origErr = console.error;
+  console.error = (...a) => { errs.push(a.map(String).join(' ')); origErr(...a); };
+  let p = null;
+  try {
+    p = mountViz(kind, host, {});
+    if (!p) throw new Error('factory 返回空');
+    const n = p.frames.length;
+    for (let i = 0; i < n; i++) p.go(i, true);
+    p.go(0, true);
+    results[kind] = { ok: errs.length === 0, frames: n, errs };
+  } catch (e) {
+    results[kind] = { ok: false, frames: p?.frames?.length ?? 0, errs: [...errs, e.message] };
+  } finally {
+    console.error = origErr;
+    p?.pause?.();
+  }
+  return results[kind];
+}
+
+function show(kind) {
+  stageBox.innerHTML = '';
+  const host = document.createElement('div');
+  stageBox.appendChild(host);
+  try { mountViz(kind, host, {}); } catch (e) { stageBox.textContent = `挂载失败: ${e.message}`; }
+  location.hash = kind;
+}
+
+const lines = [`共注册 ${VIZ_KINDS.length} 个动画`];
+report.textContent = lines.join('\n');
+
+for (const kind of VIZ_KINDS) {
+  const r = await smokeTest(kind);
+  lines.push(`${r.ok ? '✓' : '✗'} ${kind}  (${r.frames} 帧)${r.errs.length ? '  ' + r.errs[0].slice(0, 120) : ''}`);
+  report.textContent = lines.join('\n');
+}
+
+const bad = Object.entries(results).filter(([, r]) => !r.ok);
+lines.push('', bad.length ? `${bad.length} 个动画有问题：${bad.map(([k]) => k).join(', ')}` : '全部通过 ✓');
+report.textContent = lines.join('\n');
+window.__VIZ_RESULTS__ = results;
+
+VIZ_KINDS.forEach((k) => {
+  const b = document.createElement('button');
+  b.textContent = k;
+  if (!results[k]?.ok) b.classList.add('bad');
+  b.onclick = () => show(k);
+  nav.appendChild(b);
+});
+
+stageBox.innerHTML = '';
+if (location.hash.slice(1) && VIZ_KINDS.includes(location.hash.slice(1))) show(location.hash.slice(1));
+</script>
+</body>
+</html>

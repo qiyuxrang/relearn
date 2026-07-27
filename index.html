@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Relearn · 算法与 AI Agent 可视化学习</title>
+<meta name="description" content="Python 基础、数据结构与算法、图论、LangGraph 与 AI Agent 的中文可视化学习站点，每个概念配可单步执行的动画。">
+<meta name="color-scheme" content="dark light">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="assets/css/tokens.css">
+<link rel="stylesheet" href="assets/css/base.css">
+<link rel="stylesheet" href="assets/css/prose.css">
+<link rel="stylesheet" href="assets/css/viz.css">
+<link rel="stylesheet" href="assets/css/home.css">
+
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%230D9488'/><text y='72' x='50' font-size='58' font-family='monospace' font-weight='700' fill='%23fff' text-anchor='middle'>R</text></svg>">
+</head>
+<body>
+
+<div class="app">
+
+  <!-- ============ 侧边栏 ============ -->
+  <aside class="sidebar" id="sidebar">
+    <a class="brand" href="#/">
+      <span class="brand__mark">R</span>
+      <span class="brand__text">
+        <span class="brand__title">Relearn</span>
+        <span class="brand__sub">Algorithms · Visualized</span>
+      </span>
+    </a>
+
+    <div class="sidebar__search" style="position:relative">
+      <div class="search-box">
+        <span id="searchIco"></span>
+        <input id="search" type="text" placeholder="搜索课程…  Ctrl+K" autocomplete="off" spellcheck="false" aria-label="搜索课程">
+      </div>
+      <div class="search-panel" id="searchPanel" role="listbox"></div>
+    </div>
+
+    <nav class="sidebar__nav" id="nav" aria-label="课程导航"></nav>
+
+    <div class="sidebar__foot">
+      <div class="progress-bar"><div class="progress-bar__fill" id="progFill"></div></div>
+      <span id="progTxt">已完成 0 / 0 节</span>
+    </div>
+  </aside>
+
+  <!-- ============ 主区 ============ -->
+  <div class="main">
+    <header class="topbar">
+      <button class="icon-btn menu-btn" id="menuBtn" type="button" aria-label="打开导航"></button>
+      <div class="topbar__crumb" id="crumb"></div>
+      <div class="topbar__actions">
+        <button class="icon-btn" id="themeBtn" type="button" aria-label="切换主题"></button>
+      </div>
+    </header>
+
+    <main class="view" id="view"></main>
+  </div>
+
+</div>
+
+<div class="scrim" id="scrim"></div>
+
+<noscript>
+  <div style="padding:40px;text-align:center;color:#B4C2DA">
+    这个站点需要启用 JavaScript 才能运行动画与课程渲染。
+  </div>
+</noscript>
+
+<script type="module" src="assets/js/app.js?v=py-basic-20260727"></script>
+</body>
+</html>
