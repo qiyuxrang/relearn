@@ -5,6 +5,14 @@
 
 这是一个从 0 到 1 通过 vibe coding 完成的个人学习项目：需求拆解、内容补全、交互实现、题库 Python 化、校验与最终整理都围绕真实学习体验迭代完成。
 
+## 首页展示
+
+![Relearn 首页](assets/screenshots/home.png)
+
+| STL vector 动画 | LangGraph 人在回路动画 |
+|---|---|
+| ![vector push_back 可视化](assets/screenshots/vector-push-back.png) | ![LangGraph HITL 可视化](assets/screenshots/langgraph-hitl.png) |
+
 ## 快速开始
 
 **方式一（推荐）**：双击 `启动网站.bat`，浏览器会自动打开 `http://localhost:8642`。
